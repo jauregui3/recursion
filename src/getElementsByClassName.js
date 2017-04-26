@@ -9,21 +9,12 @@ var getElementsByClassName = function(className) {
   var result = [];
   
   var traverse = function(element) {
-  	if (element.classList) {
-  		element.classList.forEach(function(item) {
-  			if (item === className) {
-  				result.push(element)
-  			}
-  		});
-  		// for (var i = 0; i < element.classList.length; i++) {
-  		// 	if (element.classList[i] === className) {
-  		// 		result.push(element);
-  		// 	}
-  		// }
+  	if (element.classList && element.classList.contains(className)) {
+  		result.push(element);
   	}
 
-  	element.childNodes.forEach(function(node) {
-  		traverse(node);
+  	element.childNodes.forEach(function(element) {
+  		traverse(element);
   	})
   };
 
