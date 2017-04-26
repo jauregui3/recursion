@@ -10,16 +10,21 @@ var getElementsByClassName = function(className) {
   
   var traverse = function(element) {
   	if (element.classList) {
-  		for (var i = 0; i < element.classList.length; i++) {
-  			if (element.classList[i] === className) {
-  				result.push(element);
+  		element.classList.forEach(function(item) {
+  			if (item === className) {
+  				result.push(element)
   			}
-  		}
+  		});
+  		// for (var i = 0; i < element.classList.length; i++) {
+  		// 	if (element.classList[i] === className) {
+  		// 		result.push(element);
+  		// 	}
+  		// }
   	}
 
-  	for (var i = 0; i < element.childNodes.length; i++) {
-  		traverse(element.childNodes[i]);
-  	}
+  	element.childNodes.forEach(function(node) {
+  		traverse(node);
+  	})
   };
 
   traverse(document.body); 
