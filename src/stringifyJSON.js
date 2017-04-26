@@ -8,20 +8,20 @@ var stringifyJSON = function(obj) {
   if (typeof obj === 'number' || typeof obj === 'boolean' || obj === null) {
   	return '' + obj;
   } else if (typeof obj === 'string') {
-  	return '"' + obj + '"';
+  	return '\"' + obj + '\"';
   } else if (Array.isArray(obj)) {
     obj = obj.map(function(item) {
       return stringifyJSON(item);
     });
     return '[' + obj + ']';
-  } else if (typeof obj === 'object' && obj !== null) {
-    var results = [];
+  } else if (typeof obj === 'object') {
+    var result = [];
     for (var key in obj) {
       if (obj[key] === undefined || typeof(obj[key]) === 'function') {
-        continue;
+        return '{}';
       }
-      results.push(stringifyJSON(key) + ':' + stringifyJSON(obj[key]));
+      result.push(stringifyJSON(key) + ':' + stringifyJSON(obj[key]));
     }
-    return '{' + results.join() + '}';
+    return '{' + result.join(',') + '}';
   }
 };
